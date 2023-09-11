@@ -21,9 +21,26 @@
   <span class="drop-title">Drop PDF or Word files here</span>
   or
   <input
+    class="form-control"
+    type="text"
+    id="nameFile"
+    placeholder="Save File As"
+    aria-label="default input example"
+  />
+
+  <input
     type="file"
-    id="images"
+    id="files"
     accept=".pdf, .docx, .doc"
     (change)="onFileSelected($event)"
+    [(ngModel)]="selectedFileName"
   />
+  <button (click)="uploadFile()">Upload</button>
+  <div
+    *ngIf="showAlert"
+    [class]="'alert ' + (alertSuccessColor ? 'alert-success' : 'alert-danger')"
+    role="alert"
+  >
+    {{ successMessage }}
+  </div>
 </label>

@@ -9,18 +9,21 @@
       id="dropdownBasic1"
       ngbDropdownToggle
     >
-      files in the server
+      Server Files
       <span class="badge text-bg-dark">{{
-        sharedService.getItems().length
+        this.sharedService.fileNames.length
       }}</span>
     </button>
 
     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <div></div>
       <button
-        *ngFor="let item of sharedService.getItems()"
+        *ngFor="let fileName of this.sharedService.fileNames"
         class="dropdown-item"
       >
-        {{ item.label }}
+        <i class="fas fa-download px-2" (click)="downloadFile(fileName)"></i>
+        <i class="fas fa-trash px-2" (click)="deleteFile(fileName)"></i>
+        {{ fileName }}
       </button>
     </div>
   </div>
