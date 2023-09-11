@@ -1,0 +1,27 @@
+<nav
+  class="navbar bg-dark border-bottom border-body navbar-expand-sm"
+  data-bs-theme="dark"
+>
+  <!-- Navbar content -->
+  <div ngbDropdown class="d-inline-block container">
+    <button
+      class="btn btn-outline-success btn-light"
+      id="dropdownBasic1"
+      ngbDropdownToggle
+    >
+      files in the server
+      <span class="badge text-bg-dark">{{
+        sharedService.getItems().length
+      }}</span>
+    </button>
+
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button
+        *ngFor="let item of sharedService.getItems()"
+        class="dropdown-item"
+      >
+        {{ item.label }}
+      </button>
+    </div>
+  </div>
+</nav>

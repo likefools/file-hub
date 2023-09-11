@@ -1,0 +1,12 @@
+Progressbar - 1% for 100% for file uploading
+
+Alerts - messag (successfully or danger)
+
+Buttons - select file
+
+Tooltip - to inpo Button
+
+Typeahead - name file
+
+Badges - to see how many files there are on the server
+

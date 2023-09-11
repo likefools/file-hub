@@ -1,0 +1,29 @@
+<div class="container py-3">
+  <div class="form-group">
+    <label for="newItem">file Label:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="newItem"
+      [(ngModel)]="newItemLabel"
+    />
+    <button class="btn btn-primary" (click)="addItem()">Add Item</button>
+  </div>
+</div>
+
+<label
+  for="images"
+  class="drop-container"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave()"
+  (drop)="onDrop($event)"
+>
+  <span class="drop-title">Drop PDF or Word files here</span>
+  or
+  <input
+    type="file"
+    id="images"
+    accept=".pdf, .docx, .doc"
+    (change)="onFileSelected($event)"
+  />
+</label>
