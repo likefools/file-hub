@@ -11,16 +11,5 @@ export class FileListComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    const serverUrl = 'http://localhost:3000';
-
-    this.http.get<any>(`${serverUrl}/api/files`).subscribe(
-      (response) => {
-        this.fileNames = response.files;
-      },
-      (error) => {
-        console.error('Error fetching file names:', error);
-      }
-    );
-  }
+  ngOnInit(): void {}
 }

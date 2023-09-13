@@ -2,8 +2,10 @@
   class="navbar bg-dark border-bottom border-body navbar-expand-sm"
   data-bs-theme="dark"
 >
-  <!-- Navbar content -->
-  <div ngbDropdown class="d-inline-block container">
+  <div
+    ngbDropdown
+    class="d-inline-block container d-flex justify-content-between"
+  >
     <button
       class="btn btn-outline-success btn-light"
       id="dropdownBasic1"
@@ -16,15 +18,18 @@
     </button>
 
     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <div></div>
-      <button
+      <div
         *ngFor="let fileName of this.sharedService.fileNames"
-        class="dropdown-item"
+        class="dropdown-item p-2 px-4"
       >
-        <i class="fas fa-download px-2" (click)="downloadFile(fileName)"></i>
-        <i class="fas fa-trash px-2" (click)="deleteFile(fileName)"></i>
+        <i
+          class="fas fa-download mx-1 p-2"
+          (click)="downloadFile(fileName)"
+        ></i>
+        <i class="fas fa-trash mx-1 p-2" (click)="deleteFile(fileName)"></i>
         {{ fileName }}
-      </button>
+      </div>
     </div>
+    <a class="navbar-brand" href="#">FILE-HUB</a>
   </div>
 </nav>

@@ -11,7 +11,7 @@ app.use(cors());
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "src/app/MY-FILES/"); // Define the folder where files will be saved
+    cb(null, "src/app/MY-FILES/");
   },
   filename: (req, file, cb) => {
     const decodedFileName = decodeURIComponent(file.originalname);
@@ -27,9 +27,8 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 });
 
 app.get("/api/files", (req, res) => {
-  const folderPath = path.join(__dirname, "src", "app", "MY-FILES"); // Define the folder path
+  const folderPath = path.join(__dirname, "src", "app", "MY-FILES");
 
-  // Read the contents of the folder
   fs.readdir(folderPath, (err, files) => {
     if (err) {
       console.error("Error reading folder:", err);
@@ -44,16 +43,13 @@ app.get("/api/download/:fileName", (req, res) => {
   const fileName = req.params.fileName;
   const filePath = path.join(__dirname, "src", "app", "MY-FILES", fileName);
 
-  // Check if the file exists
   if (fs.existsSync(filePath)) {
-    // Set appropriate headers for file download
     res.setHeader(
       "Content-Disposition",
       `attachment; filename="${encodeURIComponent(fileName)}"`
     );
     res.setHeader("Content-type", "application/octet-stream");
 
-    // Create a read stream from the file and pipe it to the response
     const fileStream = fs.createReadStream(filePath);
     fileStream.pipe(res);
   } else {
@@ -65,9 +61,7 @@ app.delete("/api/delete/:fileName", (req, res) => {
   const fileName = req.params.fileName;
   const filePath = path.join(__dirname, "src", "app", "MY-FILES", fileName);
 
-  // Check if the file exists
   if (fs.existsSync(filePath)) {
-    // Delete the file
     fs.unlinkSync(filePath);
     res.status(200).json({ message: "File deleted successfully" });
   } else {

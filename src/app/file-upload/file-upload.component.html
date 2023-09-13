@@ -1,46 +1,54 @@
 <div class="container py-3">
-  <div class="form-group">
-    <label for="newItem">file Label:</label>
-    <input
-      type="text"
-      class="form-control"
-      id="newItem"
-      [(ngModel)]="newItemLabel"
-    />
-    <button class="btn btn-primary" (click)="addItem()">Add Item</button>
-  </div>
-</div>
-
-<label
-  for="images"
-  class="drop-container"
-  (dragover)="onDragOver($event)"
-  (dragleave)="onDragLeave()"
-  (drop)="onDrop($event)"
->
-  <span class="drop-title">Drop PDF or Word files here</span>
-  or
-  <input
-    class="form-control"
-    type="text"
-    id="nameFile"
-    placeholder="Save File As"
-    aria-label="default input example"
-  />
-
-  <input
-    type="file"
-    id="files"
-    accept=".pdf, .docx, .doc"
-    (change)="onFileSelected($event)"
-    [(ngModel)]="selectedFileName"
-  />
-  <button (click)="uploadFile()">Upload</button>
-  <div
-    *ngIf="showAlert"
-    [class]="'alert ' + (alertSuccessColor ? 'alert-success' : 'alert-danger')"
-    role="alert"
+  <label
+    for="images"
+    class="drop-container position-relative p-2"
+    (dragover)="onDragOver($event)"
+    (drop)="onDrop($event)"
   >
-    {{ successMessage }}
-  </div>
-</label>
+    <i class="fa-solid fa-cloud-arrow-up"></i>
+    <span class="drop-title">Drop PDF or Word files here</span>
+    or
+    <input
+      class="form-control p-2"
+      type="text"
+      id="nameFile"
+      placeholder="Change file name"
+      aria-label="default input example"
+    />
+
+    <input
+      type="file"
+      class="m-2"
+      id="files"
+      accept=".pdf, .docx, .doc"
+      (change)="onFileSelected($event)"
+      [(ngModel)]="this.sharedService.selectedFileName"
+    />
+    <div class="progress" *ngIf="this.sharedService.uploadProgress > 0">
+      <div
+        class="progress-bar p-2"
+        role="progressbar"
+        [style.width.%]="this.sharedService.uploadProgress"
+      >
+        {{ this.sharedService.uploadProgress }}%
+      </div>
+    </div>
+
+    <button class="btn btn-primary uploadFile" (click)="uploadFile()">
+      Upload
+    </button>
+    <div
+      class="position-absolute top-100 start-50 translate-middle"
+      *ngIf="this.sharedService.showAlert"
+      [class]="
+        'alert ' +
+        (this.sharedService.alertSuccessColor
+          ? 'alert-success'
+          : 'alert-danger')
+      "
+      role="alert"
+    >
+      {{ this.sharedService.successMessage }}
+    </div>
+  </label>
+</div>
