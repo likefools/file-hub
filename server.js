@@ -11,7 +11,7 @@ app.use(cors());
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "src/app/MY-FILES/");
+    cb(null, "MY-FILES/");
   },
   filename: (req, file, cb) => {
     const decodedFileName = decodeURIComponent(file.originalname);
@@ -27,7 +27,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 });
 
 app.get("/api/files", (req, res) => {
-  const folderPath = path.join(__dirname, "src", "app", "MY-FILES");
+  const folderPath = path.join(__dirname, "MY-FILES");
 
   fs.readdir(folderPath, (err, files) => {
     if (err) {
@@ -41,7 +41,7 @@ app.get("/api/files", (req, res) => {
 
 app.get("/api/download/:fileName", (req, res) => {
   const fileName = req.params.fileName;
-  const filePath = path.join(__dirname, "src", "app", "MY-FILES", fileName);
+  const filePath = path.join(__dirname, "MY-FILES", fileName);
 
   if (fs.existsSync(filePath)) {
     res.setHeader(
@@ -59,7 +59,7 @@ app.get("/api/download/:fileName", (req, res) => {
 
 app.delete("/api/delete/:fileName", (req, res) => {
   const fileName = req.params.fileName;
-  const filePath = path.join(__dirname, "src", "app", "MY-FILES", fileName);
+  const filePath = path.join(__dirname, "MY-FILES", fileName);
 
   if (fs.existsSync(filePath)) {
     fs.unlinkSync(filePath);
